@@ -1,0 +1,20 @@
+[build]
+  command = "npm run build"
+  publish = ".netlify/functions-internal"
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/entry"
+  status = 200
+
+[functions]
+  directory = "dist/functions"
+  node_bundler = "esbuild"
+
+[dev]
+  framework = "astro"
+
+[build.environment]
+  TURSO_DB_URL = "libsql://bookmarkgenius-fjmedina.turso.io"
+  TURSO_DB_AUTH_TOKEN = "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3MzE2Nzg4OTYsImlkIjoiZjU4NDc0MTQtNzkzOS00Y2ZkLTk3YmUtYzc1ZjI1MDNmNDQ1In0.-G-rNjs5DsDTKQW-772nKrfzFSrhi0WOA8Y3QAol95aJnc5lOGPMyjxgOPaGS7cvPc5s9a4TEFqL1--m5l59Cw"

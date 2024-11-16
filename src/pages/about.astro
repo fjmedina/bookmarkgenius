@@ -1,0 +1,105 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+
+const team = [
+  {
+    name: "Laura Martínez",
+    role: "CEO & Fundadora",
+    bio: "Ex-Google, apasionada por la IA y la productividad digital.",
+    avatar: "👩‍💼"
+  },
+  {
+    name: "David Kim",
+    role: "CTO",
+    bio: "Experto en IA y desarrollo de extensiones para navegadores.",
+    avatar: "👨‍💻"
+  },
+  {
+    name: "Sofia Chen",
+    role: "Diseñadora de Producto",
+    bio: "Especialista en UX con 10 años de experiencia en productos digitales.",
+    avatar: "👩‍🎨"
+  }
+];
+
+const values = [
+  {
+    title: "Innovación",
+    description: "Impulsamos el futuro de la organización digital con IA.",
+    icon: "💡"
+  },
+  {
+    title: "Simplicidad",
+    description: "Creemos en soluciones elegantes y fáciles de usar.",
+    icon: "✨"
+  },
+  {
+    title: "Privacidad",
+    description: "Tu información es tuya. Punto.",
+    icon: "🔒"
+  }
+];
+---
+
+<Layout title="Sobre Nosotros - Bookmark Genius">
+  <main class="pt-32">
+    <section class="py-20">
+      <div class="container mx-auto px-4">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h1 class="text-4xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-transparent bg-clip-text">
+            Nuestra Historia
+          </h1>
+          <p class="text-xl text-gray-600 [text-wrap:balance]">
+            Nacimos de la necesidad de simplificar la gestión de información digital. Hoy, ayudamos a miles de personas a ser más productivas.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+          {values.map(value => (
+            <div class="bg-white p-8 rounded-2xl border border-gray-100">
+              <div class="w-14 h-14 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl flex items-center justify-center mb-6">
+                <span class="text-3xl">{value.icon}</span>
+              </div>
+              <h3 class="text-xl font-bold mb-3">{value.title}</h3>
+              <p class="text-gray-600">{value.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-3xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-transparent bg-clip-text">
+            Nuestro Equipo
+          </h2>
+          <p class="text-xl text-gray-600 [text-wrap:balance]">
+            Un grupo de apasionados por la tecnología y la productividad.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          {team.map(member => (
+            <div class="bg-white p-8 rounded-2xl text-center border border-gray-100">
+              <div class="w-24 h-24 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span class="text-4xl">{member.avatar}</span>
+              </div>
+              <h3 class="text-xl font-bold mb-2">{member.name}</h3>
+              <p class="text-blue-600 mb-4">{member.role}</p>
+              <p class="text-gray-600">{member.bio}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 bg-gradient-to-b from-blue-50/50 to-white">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-600 to-indigo-600 text-transparent bg-clip-text">
+          ¿Te gustaría unirte a nuestro equipo?
+        </h2>
+        <Button href="/careers">
+          Ver Oportunidades
+        </Button>
+      </div>
+    </section>
+  </main>
+</Layout>

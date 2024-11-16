@@ -1,0 +1,89 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { verifyToken } from '../../lib/auth';
+import { client } from '../../lib/db';
+
+// Verificar autenticación
+const token = Astro.cookies.get('token')?.value;
+if (!token) {
+  return Astro.redirect('/admin/login');
+}
+
+const payload = await verifyToken(token);
+if (!payload) {
+  return Astro.redirect('/admin/login');
+}
+
+// Obtener estadísticas
+const postsCount = await client.execute('SELECT COUNT(*) as count FROM posts');
+const pagesCount = await client.execute('SELECT COUNT(*) as count FROM pages');
+const recentPosts = await client.execute(`
+  SELECT posts.*, users.name as author_name 
+  FROM posts 
+  JOIN users ON posts.author_id = users.id 
+  ORDER BY created_at DESC 
+  LIMIT 5
+`);
+---
+
+<Layout title="Panel de Administración">
+  <main class="min-h-screen pt-32 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center mb-8">
+        <h1 class="text-2xl font-bold">Panel de Administración</h1>
+        <a
+          href="/admin/posts/new"
+          class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 rounded-lg hover:opacity-90 transition-opacity"
+        >
+          Nuevo Post
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-white p-6 rounded-xl border border-gray-100">
+          <h3 class="text-lg font-semibold mb-2">Posts Publicados</h3>
+          <p class="text-3xl font-bold text-blue-600">{postsCount.rows[0].count}</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-xl border border-gray-100">
+          <h3 class="text-lg font-semibold mb-2">Páginas</h3>
+          <p class="text-3xl font-bold text-blue-600">{pagesCount.rows[0].count}</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl border border-gray-100 overflow-hidden">
+        <div class="p-6 border-b border-gray-100">
+          <h2 class="text-lg font-semibold">Posts Recientes</h2>
+        </div>
+        <div class="divide-y divide-gray-100">
+          {recentPosts.rows.map((post: any) => (
+            <div class="p-6 flex items-center justify-between">
+              <div>
+                <h3 class="font-medium mb-1">{post.title}</h3>
+                <p class="text-sm text-gray-500">
+                  por {post.author_name} · {new Date(post.created_at).toLocaleDateString()}
+                </p>
+              </div>
+              <div class="flex items-center gap-2">
+                <a
+                  href={`/admin/posts/${post.id}/edit`}
+                  class="text-blue-600 hover:text-blue-700"
+                >
+                  Editar
+                </a>
+                <span class="text-gray-300">|</span>
+                <a
+                  href={`/blog/${post.slug}`}
+                  target="_blank"
+                  class="text-gray-600 hover:text-gray-700"
+                >
+                  Ver
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

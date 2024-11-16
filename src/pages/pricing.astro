@@ -1,0 +1,119 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+
+const plans = [
+  {
+    name: "Gratuito",
+    price: "0",
+    description: "Perfecto para empezar",
+    features: [
+      "Hasta 100 marcadores",
+      "Categorización básica",
+      "Búsqueda simple",
+      "Sincronización en 1 dispositivo"
+    ]
+  },
+  {
+    name: "Pro",
+    price: "5",
+    description: "Para usuarios avanzados",
+    popular: true,
+    features: [
+      "Marcadores ilimitados",
+      "IA avanzada de categorización",
+      "Búsqueda semántica",
+      "Sincronización en todos los dispositivos",
+      "Etiquetas personalizadas",
+      "Respaldos automáticos"
+    ]
+  },
+  {
+    name: "Empresas",
+    price: "12",
+    description: "Para equipos y organizaciones",
+    features: [
+      "Todo lo incluido en Pro",
+      "Panel de administración",
+      "Usuarios ilimitados",
+      "Carpetas compartidas",
+      "Análisis y reportes",
+      "Soporte prioritario"
+    ]
+  }
+];
+---
+
+<Layout title="Precios - Bookmark Genius">
+  <main class="pt-32">
+    <section class="py-20">
+      <div class="container mx-auto px-4">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h1 class="text-4xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-transparent bg-clip-text">
+            Planes que se Adaptan a Ti
+          </h1>
+          <p class="text-xl text-gray-600 [text-wrap:balance]">
+            Elige el plan que mejor se ajuste a tus necesidades y comienza a organizar tus marcadores de forma inteligente.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {plans.map(plan => (
+            <div class={`relative bg-white rounded-2xl p-8 border ${plan.popular ? 'border-blue-500 shadow-xl shadow-blue-500/10' : 'border-gray-100'}`}>
+              {plan.popular && (
+                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-1 rounded-full text-sm font-medium">
+                  Más Popular
+                </div>
+              )}
+              <div class="text-center mb-8">
+                <h3 class="text-2xl font-bold mb-2">{plan.name}</h3>
+                <p class="text-gray-600 mb-4">{plan.description}</p>
+                <div class="flex items-baseline justify-center gap-1">
+                  <span class="text-4xl font-bold">${plan.price}</span>
+                  <span class="text-gray-600">/mes</span>
+                </div>
+              </div>
+              <ul class="space-y-4 mb-8">
+                {plan.features.map(feature => (
+                  <li class="flex items-center gap-3 text-gray-700">
+                    <span class="text-blue-600">✓</span>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <Button
+                href="https://chrome.google.com/webstore"
+                variant={plan.popular ? 'primary' : 'secondary'}
+                class="w-full justify-center"
+              >
+                Comenzar {plan.name}
+              </Button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 bg-gradient-to-b from-blue-50/50 to-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="text-3xl font-bold mb-6">Preguntas Frecuentes</h2>
+          <div class="space-y-8">
+            <div class="text-left">
+              <h3 class="text-xl font-semibold mb-2">¿Puedo cambiar de plan en cualquier momento?</h3>
+              <p class="text-gray-600">Sí, puedes actualizar o cambiar tu plan en cualquier momento. Los cambios se aplicarán inmediatamente.</p>
+            </div>
+            <div class="text-left">
+              <h3 class="text-xl font-semibold mb-2">¿Ofrecen reembolsos?</h3>
+              <p class="text-gray-600">Sí, ofrecemos una garantía de devolución de dinero de 30 días si no estás satisfecho con tu compra.</p>
+            </div>
+            <div class="text-left">
+              <h3 class="text-xl font-semibold mb-2">¿Necesito tarjeta de crédito para la versión gratuita?</h3>
+              <p class="text-gray-600">No, la versión gratuita no requiere información de pago y puedes usarla por tiempo ilimitado.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

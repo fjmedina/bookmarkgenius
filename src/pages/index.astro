@@ -1,0 +1,144 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import Feature from '../components/Feature.astro';
+
+const features = [
+	{
+		title: "Clasificación Automática con IA",
+		description: "Nuestro sistema de IA organiza automáticamente tus marcadores en categorías relevantes.",
+		icon: "🤖"
+	},
+	{
+		title: "Organización sin Esfuerzo",
+		description: "Olvídate de la organización manual. Bookmark Genius hace todo el trabajo por ti.",
+		icon: "✨"
+	},
+	{
+		title: "Búsqueda Semántica",
+		description: "Encuentra cualquier marcador al instante con nuestra búsqueda basada en el significado.",
+		icon: "🔍"
+	},
+	{
+		title: "Sincronización Multi-dispositivo",
+		description: "Accede a tus marcadores desde cualquier dispositivo, siempre actualizados.",
+		icon: "🔄"
+	}
+];
+
+const testimonials = [
+	{
+		name: "Ana García",
+		role: "Diseñadora UX",
+		content: "Bookmark Genius ha revolucionado la forma en que organizo mis referencias de diseño. ¡Es increíble!",
+		avatar: "👩"
+	},
+	{
+		name: "Carlos Rodríguez",
+		role: "Desarrollador Web",
+		content: "La clasificación automática me ahorra horas de trabajo. Una herramienta imprescindible.",
+		avatar: "👨"
+	}
+];
+---
+
+<Layout title="Bookmark Genius - La forma inteligente de organizar tus bookmarks">
+	<main>
+		<!-- Hero Section -->
+		<section class="relative pt-32 pb-20 overflow-hidden">
+			<div class="absolute inset-0 -z-10">
+				<div class="absolute inset-0 bg-gradient-to-b from-blue-50/80 to-white"></div>
+				<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-blue-100/50 rounded-full blur-3xl"></div>
+			</div>
+			<div class="container mx-auto px-4 text-center">
+				<div class="inline-block mb-4 px-6 py-2 bg-blue-50 rounded-full">
+					<span class="text-blue-600 font-medium">✨ La extensión #1 para gestionar bookmarks</span>
+				</div>
+				<h1 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600 text-transparent bg-clip-text [text-wrap:balance]">
+					La forma inteligente de organizar tus bookmarks
+				</h1>
+				<p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto [text-wrap:balance]">
+					Conviértete en un genio de la organización sin levantar un dedo. Deja que la IA organice tus marcadores por ti.
+				</p>
+				<div class="flex flex-col md:flex-row gap-4 justify-center">
+					<Button href="https://chrome.google.com/webstore">
+						Descargar Extensión
+					</Button>
+					<Button href="#demo" variant="secondary">
+						Ver Demo
+					</Button>
+				</div>
+			</div>
+		</section>
+
+		<!-- Features Section -->
+		<section class="py-20">
+			<div class="container mx-auto px-4">
+				<div class="text-center max-w-2xl mx-auto mb-16">
+					<h2 class="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-transparent bg-clip-text">
+						Características que te encantarán
+					</h2>
+					<p class="text-gray-600 [text-wrap:balance]">
+						Diseñado para hacer tu navegación más eficiente y organizada, con funcionalidades que se adaptan a tu forma de trabajar.
+					</p>
+				</div>
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+					{features.map(feature => (
+						<Feature {...feature} />
+					))}
+				</div>
+			</div>
+		</section>
+
+		<!-- Testimonials Section -->
+		<section class="py-20 relative">
+			<div class="absolute inset-0 -z-10">
+				<div class="absolute inset-0 bg-gradient-to-b from-white via-blue-50/50 to-white"></div>
+			</div>
+			<div class="container mx-auto px-4">
+				<div class="text-center max-w-2xl mx-auto mb-16">
+					<h2 class="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-transparent bg-clip-text">
+						Lo que dicen nuestros usuarios
+					</h2>
+					<p class="text-gray-600 [text-wrap:balance]">
+						Miles de profesionales ya confían en Bookmark Genius para mantener sus marcadores organizados.
+					</p>
+				</div>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+					{testimonials.map(testimonial => (
+						<div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300">
+							<div class="flex items-center gap-4 mb-4">
+								<div class="w-12 h-12 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl flex items-center justify-center">
+									<span class="text-2xl">{testimonial.avatar}</span>
+								</div>
+								<div>
+									<h3 class="font-semibold text-gray-900">{testimonial.name}</h3>
+									<p class="text-gray-600">{testimonial.role}</p>
+								</div>
+							</div>
+							<p class="text-gray-700 leading-relaxed">{testimonial.content}</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<!-- CTA Section -->
+		<section class="py-20">
+			<div class="container mx-auto px-4">
+				<div class="max-w-4xl mx-auto bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl p-12 text-center relative overflow-hidden">
+					<div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.15),transparent)]"></div>
+					<h2 class="text-3xl font-bold mb-6 text-white relative z-10">
+						Empieza a organizar tus bookmarks de forma inteligente
+					</h2>
+					<p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto relative z-10 [text-wrap:balance]">
+						Únete a miles de usuarios que ya disfrutan de una experiencia de navegación más organizada.
+					</p>
+					<Button href="https://chrome.google.com/webstore" variant="secondary" class="relative z-10">
+						Descargar Extensión Gratuita
+					</Button>
+				</div>
+			</div>
+		</section>
+	</main>
+</Layout>
